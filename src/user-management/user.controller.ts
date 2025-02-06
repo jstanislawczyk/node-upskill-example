@@ -1,25 +1,33 @@
-import {Body, Controller, Get, Post} from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
 import { UserService } from './user.service';
-import {User} from './user.entity';
-import {NewUserDto} from './dto/new-user.dto';
-import {mapToUser} from './mappers/new-user.dto.mapper';
+import { User } from './user.entity';
+import { NewUserDto } from './dto/new-user.dto';
+import { mapToNewUser, mapToUserDto } from './mappers/new-user.dto.mapper';
+import { UserDto } from './dto/user.dto';
 
-@Controller()
+@Controller("/users")
 export class UserController {
 
   constructor(private readonly userService: UserService) {}
 
-  @Get()
-  public getUser(id: number): Promise<User | null> {
-    return this.userService.getUserById(id);
+  @Get(":id")
+  public async getUser(
+    @Param("id") id: number,
+  ): Promise<UserDto | null> {
+    const user = await this.userService.getUserById(id);
+
+    if (!user) {
+      throw new NotFoundException(`User with id=${id} not found`);
+    }
+
+    return mapToUserDto(user);
   }
 
-
   @Post()
-  public createUser(
-    @Body() newUserDto: NewUserDto
+  public async createUser(
+    @Body() newUserDto: NewUserDto,
   ): Promise<User | null> {
-    const newUser = mapToUser(newUserDto);
+    const newUser = mapToNewUser(newUserDto);
     return this.userService.saveUser(newUser);
   }
 }

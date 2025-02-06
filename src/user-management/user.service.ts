@@ -1,7 +1,8 @@
-import {Injectable} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import {User} from './user.entity';
-import {InjectRepository} from '@nestjs/typeorm';
+import { User } from './user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { NewUser } from './domain/new-user';
 
 @Injectable()
 export class UserService {
@@ -17,7 +18,7 @@ export class UserService {
     });
   }
 
-  public async saveUser(user: User): Promise<User> {
+  public async saveUser(user: NewUser): Promise<User> {
     return this.photoRepository.save(user);
   }
 }

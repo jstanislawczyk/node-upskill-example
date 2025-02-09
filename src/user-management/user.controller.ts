@@ -1,5 +1,5 @@
 import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
-import { UserService } from './user.service';
+import { DatabaseUserService } from './user.service-inject';
 import { User } from './user.entity';
 import { NewUserDto } from './dto/new-user.dto';
 import { mapToNewUser, mapToUserDto } from './mappers/new-user.dto.mapper';
@@ -8,7 +8,9 @@ import { UserDto } from './dto/user.dto';
 @Controller("/users")
 export class UserController {
 
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: DatabaseUserService,
+  ) {}
 
   @Get(":id")
   public async getUser(

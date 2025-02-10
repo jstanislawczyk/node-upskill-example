@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
-import { NewUser } from './domain/new-user';
+import { NewUser } from './model/new-user';
 
 export interface UserRepository {
   findById(id: number): Promise<User | null>;

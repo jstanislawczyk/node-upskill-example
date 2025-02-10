@@ -1,6 +1,6 @@
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
-import { NewUser } from './domain/new-user';
+import { NewUser } from './model/new-user';
 import { DatabaseUserService } from './user.service';
 
 class HashMapUserRepository implements UserRepository {

@@ -4,10 +4,12 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import databaseConfig from './common/config/database/database.config';
 import { CronModule } from './cron/cron.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { NotificationModule } from './notifications/notification.module';
 
 @Module({
   imports: [
     UserModule,
+    NotificationModule,
     CronModule,
     TypeOrmModule.forRoot(databaseConfig),
     ScheduleModule.forRoot(),

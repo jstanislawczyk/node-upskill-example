@@ -1,6 +1,6 @@
 import { NewUserDto } from '../dto/new-user.dto';
 import { User } from '../user.entity';
-import { NewUser } from '../domain/new-user';
+import { NewUser } from '../model/new-user';
 import { UserDto } from '../dto/user.dto';
 
 export const mapToNewUser = (newUserDto: NewUserDto): NewUser => ({

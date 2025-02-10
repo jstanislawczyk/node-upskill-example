@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 import { DatabaseUserService } from './user.service-inject';
 import { User } from './user.entity';
-import { NewUser } from './domain/new-user';
+import { NewUser } from './model/new-user';
 
 describe('UserServiceInject', () => {
   const findOneByMock = jest.fn();
